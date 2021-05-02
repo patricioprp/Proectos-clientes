@@ -1,5 +1,7 @@
 import React, { Fragment,useContext } from "react";
-import proyectoContext from '../../context/proyectos/proyectoContext'
+import proyectoContext from '../../context/proyectos/proyectoContext';
+import tareaContext from '../../context/tareas/tareaContext';
+
 import Tarea from './Tarea';
 
 const ListadoTareas = () => {
@@ -8,18 +10,16 @@ const ListadoTareas = () => {
     const proyectosContext = useContext(proyectoContext);
     const {proyecto,eliminarProyecto} = proyectosContext;
 
+      //obtener las tareas del proyecto
+  const tareasContext = useContext(tareaContext);
+  const {tareasProyecto} =tareasContext;
+ 
+
     //si no hay proyecto seleccionado
     if(!proyecto) return <h2>Selecciona un proyecto</h2>
 
-    //Arrau destructuring para extraer el proyecto
+    //Array destructuring para extraer el proyecto
     const [proyectoActual] = proyecto;
-
-    const tareasProyecto = [
-        { nombre: "Elegir Plataforma" , estado: true },
-        { nombre: "Elegir Colores" , estado: false },
-        { nombre: "Elegir Plataforma de Pagos" , estado: false },
-        { nombre: "Elegir Hosting" , estado: true }
-    ];
 
     //Elimina un proyecto
      const onClickEliminar = () => {
@@ -37,7 +37,7 @@ const ListadoTareas = () => {
           ?(<li className="tarea"><p>No hay tareas</p></li>)
           :tareasProyecto.map(tarea => (
             <Tarea
-            key={tarea.nombre}
+            key={tarea.id}
             tarea={tarea}
             />
         ))
