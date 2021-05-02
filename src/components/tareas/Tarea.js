@@ -5,7 +5,12 @@ import tareaContext from "../../context/tareas/tareaContext";
 const Tarea = ({ tarea }) => {
   //obtener las tareas del proyecto
   const tareasContext = useContext(tareaContext);
-  const { eliminarTarea, obtenerTareas } = tareasContext;
+  const {
+    eliminarTarea,
+    obtenerTareas,
+    cambiarEstadoTarea,
+    guardarTareaActual,
+  } = tareasContext;
 
   //Extraer si un proyecto esta activo
   const proyectosContext = useContext(proyectoContext);
@@ -19,23 +24,51 @@ const Tarea = ({ tarea }) => {
     eliminarTarea(id);
     obtenerTareas(proyectoActual.id);
   };
+
+  //funcion que modifica el estado de las tareas
+  const cambiarEstado = (tarea) => {
+    if (tarea.estado) {
+      tarea.estado = false;
+    } else {
+      tarea.estado = true;
+    }
+    cambiarEstadoTarea(tarea);
+  };
+
+  //agrega una tarea actual cuando el usuario desea editarla
+  const seleccionarTarea = (tarea) => {
+    guardarTareaActual(tarea);
+  }
+
   return (
     <li className="tarea sombra">
       <p>{tarea.nombre}</p>
       <div className="estado">
         {tarea.estado ? (
-          <button type="button" className="completo ">
+          <button
+            type="button"
+            className="completo"
+            onClick={() => cambiarEstado(tarea)}
+          >
             Completo
           </button>
         ) : (
-          <button type="button" className="incompleto">
+          <button
+            type="button"
+            className="incompleto"
+            onClick={() => cambiarEstado(tarea)}
+          >
             Incompleto
           </button>
         )}
       </div>
 
       <div className="acciones">
-        <button type="button" className="btn btn-primario">
+        <button
+          type="button"
+          className="btn btn-primario"
+          onClick={() => seleccionarTarea(tarea)}
+        >
           Editar
         </button>
 
