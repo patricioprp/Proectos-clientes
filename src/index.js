@@ -15,3 +15,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+//este es un mock para poder desarrollar las funcionalidades del cliente sin necesidad de tener un back
