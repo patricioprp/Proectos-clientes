@@ -20,10 +20,10 @@ export default (state,action) => {
             }
 
         case REGISTRO_ERROR:
-            return{
+            return {
                 ...state,
                 token: null,
-                mensaje: action.payload.mensaje
+                mensaje: action.payload
             }
 
         default:

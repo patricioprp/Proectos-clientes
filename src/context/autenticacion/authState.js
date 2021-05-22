@@ -28,8 +28,6 @@ const AuthState = (props) => {
       try {
 
         const respuesta = await clienteAxios.post('/api/usuarios', datos);
-    
-        console.log(respuesta.data);
 
         dispatch({
             type: REGISTRO_EXITOSO,
@@ -37,9 +35,14 @@ const AuthState = (props) => {
         });
         
       } catch (error) {
-          console.log(error)
+          // console.log(error.response.data.msg)
+          const alerta = {
+            msg: error.response.data.msg,
+            categoria: 'alerta-error'
+          }
           dispatch({
-              type: REGISTRO_ERROR
+              type: REGISTRO_ERROR,
+              payload: alerta
           });
       }
   };
