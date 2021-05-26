@@ -1,27 +1,35 @@
-import React from 'react';
-import Sidebar from '../layouts/Sidebar';
-import Barra from '../layouts/Barra';
-import FormTarea from '../tareas/FormTarea';
-import ListadoTareas from '../tareas/ListadoTareas';
+import React, { useContext, useEffect } from "react";
+import Sidebar from "../layouts/Sidebar";
+import Barra from "../layouts/Barra";
+import FormTarea from "../tareas/FormTarea";
+import ListadoTareas from "../tareas/ListadoTareas";
+import AuthContext from "../../context/autenticacion/authContext";
 
 const Proyectos = () => {
-    return ( 
-        <div className="contenedor-app">
+  //Extraer informacion de al autenticacion
+  const authContext = useContext(AuthContext);
+  const { usuarioAutenticado } = authContext;
 
-            <Sidebar />
+  useEffect(() => {
+    usuarioAutenticado();
+  }, []);
 
-            <div className="seccion-principal">
-                <Barra />
+  return (
+    <div className="contenedor-app">
+      <Sidebar />
 
-                <main>
-                    <FormTarea />
-                    <div className="contenedor-tareas">
-                     <ListadoTareas />
-                    </div>
-                </main>
-            </div>
-        </div>
-    );
-}
- 
+      <div className="seccion-principal">
+        <Barra />
+
+        <main>
+          <FormTarea />
+          <div className="contenedor-tareas">
+            <ListadoTareas />
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+};
+
 export default Proyectos;

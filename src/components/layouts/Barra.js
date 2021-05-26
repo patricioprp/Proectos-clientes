@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../../context/autenticacion/authContext";
 
 const Barra = () => {
-    return ( 
-        <header className="app-header">
+  //Extraer informacion de al autenticacion
+  const authContext = useContext(AuthContext);
+  const { usuarioAutenticado, usuario, cerrarSesion } = authContext;
 
-            <p className="nombre-usuario">Hola <span>Patricio</span></p>
+  useEffect(() => {
+    usuarioAutenticado();
+  }, []);
 
-            <nav className="nav-principal">
-                <a href="!#">Cerrar Sesion</a>
-            </nav>
-            
-        </header>
-     );
-}
- 
+  return (
+    <header className="app-header">
+      {usuario ? (
+        <p className="nombre-usuario">
+          Hola <span>{usuario.nombre}</span>
+        </p>
+      ) : null}
+      <nav className="nav-principal">
+        <button
+        className="btn btn-blank cerrar-sesion"
+        onClick={() => cerrarSesion()}
+        >Cerrar Sesion</button>
+      </nav>
+    </header>
+  );
+};
+
 export default Barra;
