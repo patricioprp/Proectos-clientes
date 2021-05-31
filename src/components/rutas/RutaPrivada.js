@@ -12,6 +12,7 @@ const RutaPrivada = ({component:Component, ...props}) => {
     useEffect(() => {
         //esto es para que cuando se recargue la pagina no pierda la autenticacion true
         usuarioAutenticado();
+        //eslint-disable-next-line
     }, [])
 
     return ( //el render es como un return implicito
